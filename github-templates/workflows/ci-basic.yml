@@ -1,0 +1,106 @@
+name: 🔄 Basic CI Pipeline
+
+# 기본적인 CI 파이프라인 워크플로우
+# Node.js, Python, 일반적인 프로젝트에서 사용 가능
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # 코드 품질 검사
+  lint-and-format:
+    runs-on: ubuntu-latest
+    name: 📝 Code Quality Check
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔍 Run pre-commit hooks
+        uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: --all-files
+        continue-on-error: true
+
+      - name: 📊 Upload lint results
+        uses: github/super-linter@v4
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: false
+        continue-on-error: true
+
+  # 보안 검사
+  security-scan:
+    runs-on: ubuntu-latest
+    name: 🔒 Security Scan
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🛡️ Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+        continue-on-error: true
+
+      - name: 📤 Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # 의존성 검사
+  dependency-check:
+    runs-on: ubuntu-latest
+    name: 📦 Dependency Check
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check for vulnerable dependencies
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+        continue-on-error: true
+
+  # 통합 상태 보고
+  status-check:
+    runs-on: ubuntu-latest
+    name: ✅ Status Summary
+    needs: [lint-and-format, security-scan, dependency-check]
+    if: always()
+    steps:
+      - name: 📊 Check all job status
+        run: |
+          echo "=== CI Pipeline Results ==="
+          echo "Lint and Format: ${{ needs.lint-and-format.result }}"
+          echo "Security Scan: ${{ needs.security-scan.result }}"
+          echo "Dependency Check: ${{ needs.dependency-check.result }}"
+          
+          if [[ "${{ needs.lint-and-format.result }}" == "failure" ||
+                "${{ needs.security-scan.result }}" == "failure" ||  
+                "${{ needs.dependency-check.result }}" == "failure" ]]; then
+            echo "❌ Some checks failed - please review the results"
+            exit 1
+          else
+            echo "✅ All checks passed successfully!"
+          fi
+
+      - name: 🎉 Success notification
+        if: success()
+        run: |
+          echo "🎉 CI Pipeline completed successfully!"
+          echo "Ready for merge! 🚀"
+
+# 워크플로우 설정 참고사항:
+# 1. secrets.SNYK_TOKEN: Snyk API 토큰 (보안 검사용)
+# 2. pre-commit 설정이 있는 경우 .pre-commit-config.yaml 파일 필요
+# 3. 프로젝트별로 필요에 따라 단계 추가/제거 가능

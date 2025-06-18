@@ -1,92 +1,24 @@
 {
   "recommendations": [
-    // 🔧 필수 도구
     "ms-vscode.vscode-json",
     "redhat.vscode-yaml",
     "ms-vscode.vscode-eslint",
     "esbenp.prettier-vscode",
     "ms-vscode.vscode-typescript-next",
-    
-    // 🤖 AI 도구
-    "github.copilot",
-    "github.copilot-chat",
-    
-    // 📋 Taskmaster MCP 관련
     "taskmaster.taskmaster-vscode",
-    
-    // 🎨 테마 및 아이콘
     "pkief.material-icon-theme",
-    "monokai.theme-monokai-pro-vscode",
-    "github.github-vscode-theme",
-    
-    // 📝 문서화 도구
     "yzhang.markdown-all-in-one",
     "davidanson.vscode-markdownlint",
-    "bierner.markdown-mermaid",
-    "shd101wyy.markdown-preview-enhanced",
-    
-    // 🌐 웹 개발
-    "bradlc.vscode-tailwindcss",
-    "ms-vscode.vscode-css-peek",
-    "zignd.html-css-class-completion",
-    "formulahendry.auto-rename-tag",
-    "ms-vscode.vscode-html-languageservice",
-    
-    // ⚛️ React/Next.js
-    "ms-vscode.vscode-react-refactor",
-    "chakrounanas.turbo-console-log",
-    "bradlc.vscode-reactjs-snippets",
-    
-    // 🔗 Git 도구
+    "ms-python.python",
+    "ms-python.black-formatter",
     "eamodio.gitlens",
-    "donjayamanne.githistory",
-    "mhutchie.git-graph",
     "github.vscode-pull-request-github",
-    
-    // 🐳 개발 환경
-    "ms-vscode-remote.remote-containers",
-    "ms-vscode-remote.remote-ssh",
-    "ms-vscode-remote.remote-wsl",
-    "ms-azuretools.vscode-docker",
-    
-    // 🧪 테스트 도구
-    "ms-vscode.vscode-jest",
-    "orta.vscode-jest",
-    "hbenl.vscode-test-explorer",
-    
-    // 📊 유틸리티
-    "alefragnani.bookmarks",
-    "gruntfuggly.todo-tree",
-    "aaron-bond.better-comments",
-    "streetsidesoftware.code-spell-checker",
-    "wayou.vscode-todo-highlight",
-    
-    // 🔧 개발 도구
-    "ms-vscode.vscode-json5",
-    "timonwong.shellcheck",
-    "foxundermoon.shell-format",
-    "ms-vscode.powershell",
-    
-    // 📈 성능 및 분석
-    "ms-vscode.vscode-profile-flames",
-    "wix.vscode-import-cost",
+    "github.copilot",
+    "github.copilot-chat",
+    "ms-vscode.vscode-docker",
+    "formulahendry.code-runner",
     "christian-kohler.path-intellisense",
-    
-    // 🎯 특화 도구
-    "ms-vscode.vscode-github-issue-notebooks",
-    "github.vscode-github-actions",
-    "ms-vscode.github-issues-prs",
-    
-    // 📞 알림 도구
-    "ntfy.ntfy-vscode",
-    
-    // 🌍 국제화
-    "ms-ceintl.vscode-language-pack-ko"
-  ],
-  "unwantedRecommendations": [
-    // 성능에 영향을 주거나 충돌 가능성이 있는 확장들
-    "ms-vscode.vscode-css-languageservice",
-    "hookyqr.beautify",
-    "dbaeumer.jshint"
+    "streetsidesoftware.code-spell-checker",
+    "gruntfuggly.todo-tree"
   ]
 }
