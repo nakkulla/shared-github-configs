@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Git Submodule 관리 유틸리티 스크립트 (강화 버전 2.0.0)
+# Git Submodule 관리 유틸리티 스크립트 (강화 버전 2.1.0)
 # 공유 설정 저장소의 submodule을 효율적으로 관리하기 위한 고급 도구
 # 
 # 주요 기능:
@@ -11,91 +11,60 @@
 # - 롤백 지원
 #
 # 작성자: GitHub Copilot
-# 버전: 2.0.0
+# 버전: 2.1.0
 
 set -euo pipefail
 
-# 색상 및 스타일 설정
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-PURPLE='\033[0;35m'
-WHITE='\033[1;37m'
-BOLD='\033[1m'
-DIM='\033[2m'
-NC='\033[0m'
+# ==============================================================================
+# 공통 라이브러리 로드
+# ==============================================================================
+readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/common-logging.sh"
 
-# 전역 변수
+# ==============================================================================
+# 전역 변수 및 설정
+# ==============================================================================
 VERBOSE=0
 DRY_RUN=0
 PARALLEL=0
 BACKUP_DIR=""
 LOG_FILE=""
-SCRIPT_VERSION="2.0.0"
+readonly SCRIPT_VERSION="2.1.0"
 
-# 함수: 메시지 출력 (강화된 로깅 지원)
-log_message() {
-    local level="$1"
-    local message="$2"
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-    
-    # 로그 파일에 기록
-    if [ -n "$LOG_FILE" ]; then
-        echo "[$timestamp] [$level] $message" >> "$LOG_FILE"
-    fi
-    
-    # 화면 출력
-    case $level in
-        "INFO")
-            echo -e "${BLUE}[INFO]${NC} $message"
-            ;;
-        "SUCCESS")
-            echo -e "${GREEN}[SUCCESS]${NC} $message"
-            ;;
-        "WARNING")
-            echo -e "${YELLOW}[WARNING]${NC} $message"
-            ;;
-        "ERROR")
-            echo -e "${RED}[ERROR]${NC} $message"
-            ;;
-        "DEBUG")
-            if [ "$VERBOSE" = "1" ]; then
-                echo -e "${DIM}[DEBUG]${NC} $message"
-            fi
-            ;;
-    esac
-}
+# ==============================================================================
+# 메시지 출력 함수들 (공통 라이브러리 래핑)
+# ==============================================================================
 
 print_info() {
-    log_message "INFO" "$1"
+    log_info "$1"
 }
 
 print_success() {
-    log_message "SUCCESS" "$1"
+    log_success "$1"
 }
 
 print_warning() {
-    log_message "WARNING" "$1"
+    log_warning "$1"
 }
 
 print_error() {
-    log_message "ERROR" "$1"
+    log_error "$1"
 }
 
 print_debug() {
-    log_message "DEBUG" "$1"
+    log_debug "$1"
 }
 
 print_section() {
     echo -e "${CYAN}${BOLD}$1${NC}"
     echo "========================================="
+    log_info "섹션: $1"
 }
 
 print_subsection() {
     echo -e "${PURPLE}$1${NC}"
     echo "-----------------------------------------"
+    log_debug "하위섹션: $1"
 }
 
 # 함수: 도움말 (확장된 기능)
@@ -164,32 +133,13 @@ check_git_repo() {
 
 # 함수: 의존성 확인
 check_dependencies() {
-    local deps=("git" "rsync")
-    local missing=()
+    log_debug "의존성 검사 시작"
     
-    for dep in "${deps[@]}"; do
-        if ! command -v "$dep" &> /dev/null; then
-            missing+=("$dep")
-        fi
-    done
+    # 공통 라이브러리 함수 사용
+    validate_command "git"
+    validate_command "rsync"
     
-    if [ ${#missing[@]} -gt 0 ]; then
-        print_error "필수 의존성이 누락되었습니다: ${missing[*]}"
-        print_info "설치 방법:"
-        for dep in "${missing[@]}"; do
-            case $dep in
-                "rsync")
-                    echo "  macOS: brew install rsync"
-                    echo "  Ubuntu/Debian: sudo apt install rsync"
-                    ;;
-                "git")
-                    echo "  macOS: brew install git"
-                    echo "  Ubuntu/Debian: sudo apt install git"
-                    ;;
-            esac
-        done
-        exit 1
-    fi
+    log_debug "모든 의존성 확인 완료"
 }
 
 # 함수: 백업 디렉토리 설정
@@ -1140,6 +1090,20 @@ cmd_repair() {
 
 # 메인 함수
 main() {
+    # 로그 파일 기본값 설정
+    if [[ -z "$LOG_FILE" ]]; then
+        LOG_FILE="./submodule-manager-$(date '+%Y%m%d').log"
+    fi
+    
+    # 공통 라이브러리 초기화
+    init_logging "submodule-manager" "$LOG_FILE" "$([[ $VERBOSE -eq 1 ]] && echo true || echo false)" false
+    
+    log_info "Submodule 관리자 v$SCRIPT_VERSION 시작"
+    log_debug "명령행 인자: $*"
+    
+    # 타이머 시작
+    start_timer
+    
     # 의존성 확인
     check_dependencies
     
@@ -1152,11 +1116,12 @@ main() {
                 ;;
             -v|--verbose)
                 VERBOSE=1
+                LOGGING_VERBOSE=true
                 shift
                 ;;
             -n|--dry-run)
                 DRY_RUN=1
-                print_info "DRY-RUN 모드: 실제 변경사항은 적용되지 않습니다."
+                log_warning "DRY-RUN 모드: 실제 변경사항은 적용되지 않습니다."
                 shift
                 ;;
             -p|--parallel)
@@ -1246,11 +1211,13 @@ main() {
             cmd_repair
             ;;
         *)
-            print_error "알 수 없는 명령어: $COMMAND"
-            show_help
-            exit 1
+            handle_error $EXIT_MISUSE "알 수 없는 명령어: $COMMAND"
             ;;
     esac
+    
+    # 실행 시간 표시
+    end_timer
+    log_info "Submodule 관리자 완료"
 }
 
 # 스크립트 실행
