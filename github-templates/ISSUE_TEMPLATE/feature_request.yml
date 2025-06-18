@@ -1,0 +1,107 @@
+name: ✨ 기능 요청
+description: 새로운 기능이나 개선사항을 제안할 때 사용하세요
+title: "[Feature] "
+labels: ["enhancement", "needs-discussion"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        새로운 기능 제안을 해주셔서 감사합니다! 가능한 한 자세히 작성해주시면 검토에 큰 도움이 됩니다.
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: ✨ 기능 설명
+      description: 제안하고 싶은 기능에 대해 명확하고 간결하게 설명해주세요.
+      placeholder: 어떤 기능을 원하시나요?
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: 🎯 해결하고자 하는 문제
+      description: 이 기능이 어떤 문제를 해결하나요?
+      placeholder: 현재 어떤 문제나 불편함이 있나요?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: 💡 제안하는 해결방법
+      description: 어떻게 이 문제를 해결하면 좋을지 구체적으로 설명해주세요.
+      placeholder: 구체적인 해결방법이나 구현 아이디어가 있나요?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 고려한 대안들
+      description: 다른 해결방법이나 대안들을 고려해보셨나요?
+      placeholder: 다른 방법들과 비교했을 때의 장단점이 있나요?
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 📊 우선순위
+      description: 이 기능의 우선순위는 어떻게 생각하시나요?
+      options:
+        - 낮음 - 언젠가 있으면 좋을 기능
+        - 보통 - 유용할 것 같은 기능
+        - 높음 - 꼭 필요한 기능
+        - 긴급 - 즉시 필요한 기능
+      default: 1
+
+  - type: dropdown
+    id: user-type
+    attributes:
+      label: 👤 사용자 유형
+      description: 주로 어떤 사용자가 이 기능을 필요로 할까요?
+      options:
+        - 일반 사용자
+        - 개발자
+        - 관리자
+        - 모든 사용자
+        - 기타
+      multiple: true
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: 📋 사용 사례
+      description: 이 기능이 어떤 상황에서 사용될지 구체적인 예시를 들어주세요.
+      placeholder: |
+        예시:
+        1. 사용자가 ...할 때
+        2. 개발자가 ...를 설정할 때
+        3. ...
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: 🎨 목업/스케치
+      description: UI나 UX에 관련된 기능이라면 간단한 스케치나 목업을 첨부해주세요.
+      placeholder: 이미지를 여기에 드래그하거나 붙여넣기하세요...
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📝 추가 정보
+      description: 기능 요청과 관련된 다른 정보가 있다면 추가해주세요.
+      placeholder: 참고 링크, 유사한 기능을 가진 다른 도구, 기술적 고려사항 등...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ 체크리스트
+      description: 아래 항목들을 확인해주세요.
+      options:
+        - label: 기존 이슈나 기능 요청을 검색해봤습니다
+          required: true
+        - label: 이 기능이 프로젝트 목표와 일치한다고 생각합니다
+          required: true
+        - label: 기능 구현에 기여할 의향이 있습니다
+          required: false

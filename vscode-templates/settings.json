@@ -1,0 +1,134 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": true,
+  "editor.trimAutoWhitespace": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/.nuxt": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.vscode/settings.json": false
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.next": true,
+    "**/.nuxt": true,
+    "**/coverage": true,
+    "**/.nyc_output": true
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.run": "onType",
+  "eslint.format.enable": true,
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.trailingComma": "es5",
+  "prettier.tabWidth": 2,
+  "prettier.printWidth": 80,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.autofetchPeriod": 180,
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.colorTheme": "Default Dark+",
+  "terminal.integrated.defaultProfile.osx": "bash",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "markdown.preview.fontSize": 14,
+  "markdown.preview.lineHeight": 1.6,
+  "markdown.extension.toc.levels": "2..6",
+  "yaml.format.enable": true,
+  "yaml.format.singleQuote": true,
+  "json.format.enable": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "breadcrumbs.enabled": true,
+  "outline.showFunctions": true,
+  "outline.showVariables": true,
+  "problems.decorations.enabled": true,
+  "debug.allowBreakpointsEverywhere": true,
+  "extensions.autoUpdate": true,
+  "update.showReleaseNotes": false,
+  "telemetry.telemetryLevel": "error",
+  "security.workspace.trust.untrustedFiles": "prompt",
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": true,
+    "markdown": true
+  },
+  "github.copilot.chat.localeOverride": "ko",
+  "taskmaster.defaultPriority": "medium",
+  "taskmaster.autoGenerate": true,
+  "taskmaster.notifications.enabled": true,
+  "files.associations": {
+    "*.instructions.md": "markdown",
+    "*.taskmaster.json": "json",
+    "*.env.example": "properties",
+    "Dockerfile*": "dockerfile",
+    "docker-compose*.yml": "yaml"
+  },
+  "commentAnchors.tags.list": [
+    {
+      "tag": "TODO",
+      "scope": "file",
+      "highlightColor": "#FFD700",
+      "styleComment": true
+    },
+    {
+      "tag": "FIXME",
+      "scope": "file",
+      "highlightColor": "#FF6B6B",
+      "styleComment": true
+    },
+    {
+      "tag": "NOTE",
+      "scope": "file",
+      "highlightColor": "#65C5DB",
+      "styleComment": true
+    },
+    {
+      "tag": "HACK",
+      "scope": "file",
+      "highlightColor": "#FFA500",
+      "styleComment": true
+    }
+  ]
+}

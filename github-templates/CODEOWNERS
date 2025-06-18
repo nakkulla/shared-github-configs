@@ -1,0 +1,46 @@
+# CODEOWNERS 파일
+# 이 파일은 코드의 소유자를 정의합니다.
+# 각 라인은 파일 패턴 다음에 하나 이상의 소유자를 지정합니다.
+
+# 기본 소유자 (모든 파일)
+* @nakkulla
+
+# GitHub 워크플로우 및 설정 파일
+/.github/ @nakkulla
+/github-templates/ @nakkulla
+
+# VSCode 설정 파일
+/.vscode/ @nakkulla
+/vscode-templates/ @nakkulla
+
+# 문서 파일
+/docs/ @nakkulla
+/instructions/ @nakkulla
+README.md @nakkulla
+
+# 스크립트 파일
+/scripts/ @nakkulla
+
+# 설정 파일
+*.json @nakkulla
+*.yml @nakkulla
+*.yaml @nakkulla
+.gitignore @nakkulla
+
+# Taskmaster 관련 파일
+*.instructions.md @nakkulla
+/taskmaster/ @nakkulla
+
+# 라이센스 및 중요 파일
+LICENSE @nakkulla
+CONTRIBUTING.md @nakkulla
+SECURITY.md @nakkulla
+
+# 특정 파일 확장자별 소유자
+*.md @nakkulla
+*.sh @nakkulla
+
+# 프로젝트별 커스터마이징이 필요한 파일들
+# (하위 프로젝트에서 오버라이드 가능)
+# local.config.* 
+# *.local.*

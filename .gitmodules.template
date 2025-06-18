@@ -1,0 +1,29 @@
+# Git Submodules 설정 템플릿
+# 이 파일을 프로젝트의 .gitmodules로 복사하여 사용하세요
+
+# 공유 GitHub 설정 저장소 (예제)
+# [submodule "shared-configs"]
+#     path = shared-configs
+#     url = https://github.com/YOUR_USERNAME/shared-github-configs.git
+#     branch = main
+
+# 추가 submodule 예제들:
+
+# 공유 문서 저장소
+# [submodule "shared-docs"]
+#     path = shared-docs
+#     url = https://github.com/YOUR_USERNAME/shared-docs.git
+#     branch = main
+
+# 공유 유틸리티 저장소
+# [submodule "shared-utils"]
+#     path = shared-utils
+#     url = https://github.com/YOUR_USERNAME/shared-utils.git
+#     branch = main
+
+# 사용법:
+# 1. 이 템플릿을 프로젝트 루트에 .gitmodules로 복사
+# 2. YOUR_USERNAME을 실제 GitHub 사용자명으로 변경
+# 3. 필요한 submodule만 남기고 나머지는 제거
+# 4. git submodule add 명령어로 추가:
+#    git submodule add https://github.com/YOUR_USERNAME/shared-github-configs.git shared-configs

@@ -1,0 +1,208 @@
+{
+  "React Functional Component": {
+    "prefix": "rfc",
+    "body": [
+      "/**",
+      " * $1 컴포넌트",
+      " * $2",
+      " * ",
+      " * @author $3",
+      " * @since $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      " */",
+      "import React from 'react';",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $4",
+      "}",
+      "",
+      "const $1: React.FC<${1:ComponentName}Props> = ({ $5 }) => {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export default $1;"
+    ],
+    "description": "한국어 주석을 포함한 React 함수형 컴포넌트"
+  },
+  "React Hook": {
+    "prefix": "rhook",
+    "body": [
+      "/**",
+      " * $1 커스텀 훅",
+      " * $2",
+      " * ",
+      " * @author $3",
+      " * @since $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      " */",
+      "import { useState, useEffect } from 'react';",
+      "",
+      "interface Use${1:HookName}Return {",
+      "  $4",
+      "}",
+      "",
+      "export const use$1 = ($5): Use${1:HookName}Return => {",
+      "  $6",
+      "",
+      "  useEffect(() => {",
+      "    $7",
+      "  }, []);",
+      "",
+      "  return {",
+      "    $0",
+      "  };",
+      "};"
+    ],
+    "description": "한국어 주석을 포함한 React 커스텀 훅"
+  },
+  "TypeScript Interface": {
+    "prefix": "tsinterface",
+    "body": [
+      "/**",
+      " * $1 인터페이스",
+      " * $2",
+      " */",
+      "interface $1 {",
+      "  $0",
+      "}"
+    ],
+    "description": "한국어 주석을 포함한 TypeScript 인터페이스"
+  },
+  "TypeScript Type": {
+    "prefix": "tstype",
+    "body": [
+      "/**",
+      " * $1 타입",
+      " * $2",
+      " */",
+      "type $1 = $0"
+    ],
+    "description": "한국어 주석을 포함한 TypeScript 타입"
+  },
+  "Async Function": {
+    "prefix": "asyncfn",
+    "body": [
+      "/**",
+      " * $1 비동기 함수",
+      " * $2",
+      " * ",
+      " * @param {$3} $4 - $5",
+      " * @returns {Promise<$6>} $7",
+      " * @author $8",
+      " * @since $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      " */",
+      "const $1 = async ($4: $3): Promise<$6> => {",
+      "  try {",
+      "    $0",
+      "  } catch (error) {",
+      "    console.error('$1 오류:', error);",
+      "    throw error;",
+      "  }",
+      "};"
+    ],
+    "description": "한국어 주석과 에러 처리를 포함한 비동기 함수"
+  },
+  "API Service": {
+    "prefix": "apiservice",
+    "body": [
+      "/**",
+      " * $1 API 서비스",
+      " * $2",
+      " * ",
+      " * @author $3",
+      " * @since $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      " */",
+      "import { ApiResponse } from '../types/api';",
+      "",
+      "class ${1:Service}ApiService {",
+      "  private baseUrl = process.env.NEXT_PUBLIC_API_URL || '';",
+      "",
+      "  /**",
+      "   * $4 조회",
+      "   * @param {string} id - $4 ID",
+      "   * @returns {Promise<ApiResponse<$5>>} $4 데이터",
+      "   */",
+      "  async get$5(id: string): Promise<ApiResponse<$5>> {",
+      "    try {",
+      "      const response = await fetch(`\\${this.baseUrl}/$6/\\${id}`);",
+      "      if (!response.ok) {",
+      "        throw new Error(`$4 조회 실패: \\${response.status}`);",
+      "      }",
+      "      return await response.json();",
+      "    } catch (error) {",
+      "      console.error('$4 조회 오류:', error);",
+      "      throw error;",
+      "    }",
+      "  }",
+      "",
+      "  $0",
+      "}",
+      "",
+      "export default new ${1:Service}ApiService();"
+    ],
+    "description": "한국어 주석을 포함한 API 서비스 클래스"
+  },
+  "Error Handler": {
+    "prefix": "errorhandler",
+    "body": [
+      "/**",
+      " * $1 오류 처리기",
+      " * $2",
+      " */",
+      "class ${1:Service}Error extends Error {",
+      "  constructor(",
+      "    message: string,",
+      "    public code: string,",
+      "    public statusCode: number = 500",
+      "  ) {",
+      "    super(message);",
+      "    this.name = '${1:Service}Error';",
+      "  }",
+      "}",
+      "",
+      "const handle${1:Service}Error = (error: unknown): never => {",
+      "  if (error instanceof ${1:Service}Error) {",
+      "    console.error(`$1 오류 [\\${error.code}]:`, error.message);",
+      "    throw error;",
+      "  }",
+      "  ",
+      "  console.error('예상치 못한 $1 오류:', error);",
+      "  throw new ${1:Service}Error(",
+      "    '내부 $1 오류가 발생했습니다.',",
+      "    'INTERNAL_ERROR'",
+      "  );",
+      "};"
+    ],
+    "description": "한국어 메시지를 포함한 오류 처리기"
+  },
+  "Console Log with Korean": {
+    "prefix": "clog",
+    "body": [
+      "console.log('$1:', $2);"
+    ],
+    "description": "한국어 레이블을 포함한 콘솔 로그"
+  },
+  "TODO Comment": {
+    "prefix": "todo",
+    "body": [
+      "// TODO: $1 ($CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE)"
+    ],
+    "description": "날짜를 포함한 TODO 주석"
+  },
+  "FIXME Comment": {
+    "prefix": "fixme",
+    "body": [
+      "// FIXME: $1 ($CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE)"
+    ],
+    "description": "날짜를 포함한 FIXME 주석"
+  },
+  "NOTE Comment": {
+    "prefix": "note",
+    "body": [
+      "// NOTE: $1"
+    ],
+    "description": "노트 주석"
+  }
+}
