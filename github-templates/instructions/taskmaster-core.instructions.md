@@ -98,7 +98,8 @@ analyze_project_complexity --research
 
 ### 모델 설정 (⚠️ 필수)
 ```typescript
-models --setMain="gemini-2.5-flash-preview-04-17"  // 초기화 후 즉시 실행
+models --setMain="gemini-2.5-flash-preview-04-17"  // 메인 모델 설정
+models --setFallback="gemini-2.0-flash"           // 실패시 대체 모델 설정
 ```
 
 ## 📋 핵심 워크플로우
@@ -107,7 +108,8 @@ models --setMain="gemini-2.5-flash-preview-04-17"  // 초기화 후 즉시 실�
 ```typescript
 // 1. 초기화 및 모델 설정
 initialize_project
-models --setMain="gemini-2.5-flash-preview-04-17"  // 필수!
+models --setMain="gemini-2.5-flash-preview-04-17"      // 메인 모델 설정 (필수!)
+models --setFallback="gemini-2.0-flash"               // 실패시 대체 모델 설정
 
 // 2. 간결한 PRD 작성 (.taskmaster/docs/prd.txt)
 // - 핵심 기능 3-5개만
