@@ -1,20 +1,25 @@
 name: 🐛 버그 리포트
 description: 버그나 문제를 신고할 때 사용하세요
 title: "[Bug] "
-labels: ["bug", "needs-triage"]
+labels: ["🐛 bug", "📋 needs-triage"]
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        버그 리포트를 작성해주셔서 감사합니다! 가능한 한 자세히 작성해주시면 문제 해결에 큰 도움이 됩니다.
+        ## 🙏 버그 리포트를 작성해주셔서 감사합니다!
+        
+        **가능한 한 자세히 작성해주시면 문제 해결에 큰 도움이 됩니다.**
+        
+        ⚠️ **보안 관련 문제**는 이슈 대신 [이메일](mailto:security@example.com)로 신고해주세요.
 
   - type: textarea
     id: bug-description
     attributes:
       label: 🐛 버그 설명
       description: 발생한 버그에 대해 명확하고 간결하게 설명해주세요.
-      placeholder: 버그에 대한 설명을 입력하세요...
+      placeholder: |
+        예시: 사용자 로그인 시 비밀번호가 올바른데도 "잘못된 비밀번호" 오류가 표시됩니다.
     validations:
       required: true
 
@@ -24,10 +29,10 @@ body:
       label: 🔄 재현 단계
       description: 버그를 재현하는 단계를 순서대로 작성해주세요.
       placeholder: |
-        1. '...' 페이지로 이동
-        2. '...' 버튼 클릭
-        3. 스크롤을 '...'까지 내림
-        4. 오류 확인
+        1. 메인 페이지에서 '로그인' 버튼 클릭
+        2. 올바른 이메일과 비밀번호 입력
+        3. '로그인' 버튼 클릭
+        4. "잘못된 비밀번호" 오류 메시지 확인
     validations:
       required: true
 
@@ -36,7 +41,8 @@ body:
     attributes:
       label: ✅ 기대한 동작
       description: 어떤 동작을 기대했는지 설명해주세요.
-      placeholder: 기대한 동작을 설명하세요...
+      placeholder: |
+        예시: 올바른 비밀번호 입력 시 대시보드로 이동해야 합니다.
     validations:
       required: true
 
@@ -45,21 +51,40 @@ body:
     attributes:
       label: ❌ 실제 동작
       description: 실제로 어떤 일이 일어났는지 설명해주세요.
-      placeholder: 실제 동작을 설명하세요...
+      placeholder: |
+        예시: "잘못된 비밀번호" 오류 메시지가 표시되고 로그인되지 않습니다.
     validations:
       required: true
 
   - type: textarea
     id: screenshots
     attributes:
-      label: 📸 스크린샷
-      description: 가능하다면 스크린샷을 첨부해주세요.
-      placeholder: 스크린샷을 여기에 드래그하거나 붙여넣기하세요...
+      label: 📸 스크린샷/영상
+      description: 가능하다면 스크린샷이나 화면 녹화를 첨부해주세요.
+      placeholder: |
+        스크린샷/영상을 여기에 드래그하거나 붙여넣기하세요...
+        
+        또는 다음과 같이 링크를 첨부하세요:
+        ![Screenshot](https://example.com/image.png)
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🚨 심각도
+      description: 이 버그의 심각도를 선택해주세요.
+      options:
+        - 🔴 Critical - 시스템 전체가 작동하지 않음
+        - 🟠 High - 주요 기능이 작동하지 않음
+        - 🟡 Medium - 일부 기능에 문제가 있음
+        - 🟢 Low - 사소한 문제나 개선사항
+      default: 2
+    validations:
+      required: true
 
   - type: dropdown
     id: browsers
     attributes:
-      label: 🌐 브라우저
+      label: 🌐 브라우저 (해당하는 경우)
       description: 어떤 브라우저에서 문제가 발생했나요?
       options:
         - Chrome
@@ -67,22 +92,38 @@ body:
         - Safari
         - Edge
         - Opera
+        - Mobile Safari (iOS)
+        - Chrome Mobile (Android)
         - 기타
       multiple: true
 
   - type: input
-    id: os-version
+    id: environment
     attributes:
-      label: 💻 운영체제
-      description: 사용 중인 운영체제를 입력해주세요.
-      placeholder: 예) macOS 12.6, Windows 11, Ubuntu 20.04
+      label: 💻 환경 정보
+      description: 운영체제, 브라우저 버전, 앱 버전 등을 입력해주세요.
+      placeholder: |
+        예시: macOS 14.0, Chrome 120.0, 앱 버전 2.1.0
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 📋 로그/오류 메시지
+      description: 관련된 로그나 오류 메시지가 있다면 첨부해주세요.
+      placeholder: |
+        콘솔 로그, 오류 메시지, 스택 트레이스 등을 붙여넣기하세요...
+      render: shell
 
   - type: textarea
     id: additional-context
     attributes:
       label: 📝 추가 정보
       description: 버그와 관련된 다른 정보가 있다면 추가해주세요.
-      placeholder: 추가 정보나 관련 링크 등...
+      placeholder: |
+        - 특정 조건에서만 발생하는지
+        - 워크어라운드가 있는지
+        - 관련된 이슈나 PR이 있는지
+        - 기타 참고할 만한 정보
 
   - type: checkboxes
     id: checklist
@@ -95,4 +136,6 @@ body:
         - label: 최신 버전에서 테스트했습니다
           required: true
         - label: 문제 재현이 가능합니다
+          required: true
+        - label: 민감한 정보(비밀번호, API 키 등)를 포함하지 않았습니다
           required: true

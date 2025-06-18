@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 질문이나 토론
+    url: https://github.com/your-org/your-repo/discussions
+    about: 일반적인 질문이나 아이디어 토론은 여기서 해주세요
+  - name: 🔒 심각한 보안 취약점
+    url: mailto:security@example.com
+    about: 심각한 보안 문제는 이메일로 비공개 신고해주세요
+  - name: 📚 문서 및 가이드
+    url: https://your-project-docs.com
+    about: 프로젝트 문서와 가이드를 확인해보세요
+  - name: 💻 예제 및 튜토리얼
+    url: https://github.com/your-org/examples
+    about: 실용적인 예제와 튜토리얼을 찾아보세요

@@ -1,0 +1,185 @@
+name: 🔒 보안 취약점
+description: 보안 관련 문제를 신고할 때 사용하세요 (민감하지 않은 경우만)
+title: "[Security] "
+labels: ["🔒 security", "🚨 high-priority"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ 보안 취약점 신고
+        
+        **보안 문제를 신고해주셔서 감사합니다!**
+        
+        🚨 **중요**: 
+        - **심각한 보안 취약점**은 이 공개 이슈 대신 [security@example.com](mailto:security@example.com)으로 이메일을 보내주세요
+        - **악용 가능한 취약점**은 공개하지 말고 비공개 채널을 이용해주세요
+        - 이 템플릿은 **일반적인 보안 개선사항**이나 **공개해도 안전한 문제**에만 사용하세요
+
+  - type: checkboxes
+    id: security-level
+    attributes:
+      label: 🔍 보안 수준 확인
+      description: 이 문제가 공개 이슈로 적절한지 확인해주세요
+      options:
+        - label: 이 문제는 즉시 악용될 수 있는 심각한 취약점이 아닙니다
+          required: true
+        - label: 이 문제를 공개해도 보안에 큰 위험이 없다고 판단합니다
+          required: true
+        - label: 가능하다면 비공개 채널 (이메일)을 사용하는 것을 고려했습니다
+          required: true
+
+  - type: dropdown
+    id: security-type
+    attributes:
+      label: 🛡️ 보안 문제 유형
+      description: 어떤 종류의 보안 문제인가요?
+      options:
+        - 🔑 인증/권한 관련
+        - 📝 입력 검증 누락
+        - 🌐 HTTPS/TLS 설정
+        - 🔒 데이터 암호화
+        - 📋 로깅/감사 기능
+        - 🔧 보안 설정 개선
+        - 📚 보안 문서/가이드
+        - 🔍 코드 보안 검토
+        - 📦 의존성 보안
+        - 🛠️ 기타 보안 개선
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 📊 심각도
+      description: 이 보안 문제의 심각도를 평가해주세요
+      options:
+        - 🟢 낮음 - 보안 모범 사례 개선
+        - 🟡 보통 - 잠재적 위험 요소
+        - 🟠 높음 - 보안 강화 필요
+        - 🔴 심각 - 즉시 조치 필요 (이 경우 이메일 사용 권장)
+      default: 1
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: 🐛 문제 설명
+      description: 발견한 보안 문제를 설명해주세요. 민감한 정보는 포함하지 마세요.
+      placeholder: |
+        예시:
+        - 사용자 입력 검증이 불충분한 부분이 있습니다
+        - HTTPS 설정이 부분적으로만 적용되어 있습니다
+        - 로그에 민감한 정보가 기록될 수 있습니다
+        - 보안 헤더가 누락되어 있습니다
+        
+        ⚠️ 구체적인 공격 방법이나 악용 코드는 포함하지 마세요!
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected-components
+    attributes:
+      label: 🎯 영향받는 구성요소
+      description: 이 보안 문제가 영향을 주는 부분을 명시해주세요.
+      placeholder: |
+        예시:
+        - 사용자 로그인 기능
+        - API 엔드포인트 /api/users
+        - 파일 업로드 기능
+        - 관리자 대시보드
+        - 특정 파일: auth.js, user.model.js
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: 🔄 재현 단계 (일반적인 경우)
+      description: 문제를 확인할 수 있는 일반적인 단계를 설명해주세요. 악용 방법은 제외하세요.
+      placeholder: |
+        예시:
+        1. 개발자 도구에서 네트워크 탭 확인
+        2. HTTPS 설정 검토
+        3. 보안 헤더 확인 도구 사용
+        4. 코드 리뷰에서 입력 검증 부분 확인
+        
+        ⚠️ 실제 공격이나 데이터 유출 시도는 하지 마세요!
+
+  - type: textarea
+    id: potential-impact
+    attributes:
+      label: 📈 잠재적 영향
+      description: 이 문제가 해결되지 않으면 어떤 위험이 있는지 설명해주세요.
+      placeholder: |
+        예시:
+        - 사용자 개인정보 노출 위험
+        - 무단 접근 가능성
+        - 데이터 무결성 훼손
+        - 서비스 가용성 영향
+        - 규정 준수 문제
+
+  - type: textarea
+    id: suggested-solution
+    attributes:
+      label: 💡 제안하는 해결책
+      description: 이 보안 문제를 어떻게 해결하면 좋을지 제안해주세요.
+      placeholder: |
+        예시:
+        - 입력 검증 라이브러리 도입
+        - HTTPS 강제 설정 추가
+        - 보안 헤더 설정 강화
+        - 민감 정보 로깅 방지
+        - 권한 검사 로직 개선
+        - 보안 테스트 자동화
+
+  - type: textarea
+    id: references
+    attributes:
+      label: 📚 참고 자료
+      description: 관련된 보안 가이드라인이나 참고 자료가 있다면 공유해주세요.
+      placeholder: |
+        - OWASP 가이드라인
+        - 보안 모범 사례 문서
+        - 관련 CVE 번호
+        - 보안 검사 도구 결과
+        - 업계 표준 (ISO 27001, SOC 2 등)
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: 🌍 환경
+      description: 어떤 환경에서 이 문제를 발견했나요?
+      options:
+        - 🖥️ 로컬 개발 환경
+        - 🧪 테스트 환경
+        - 🚀 스테이징 환경
+        - 🌐 프로덕션 환경
+        - 📱 모바일 환경
+        - 🔧 모든 환경
+      multiple: true
+
+  - type: checkboxes
+    id: responsible-disclosure
+    attributes:
+      label: 🤝 책임감 있는 공개
+      description: 보안 문제 신고에 대한 동의사항
+      options:
+        - label: 이 문제가 수정될 때까지 세부사항을 공개하지 않겠습니다
+          required: true
+        - label: 악의적인 목적으로 이 정보를 사용하지 않겠습니다
+          required: true
+        - label: 필요시 추가 정보 제공에 협조하겠습니다
+          required: true
+        - label: 가능하다면 수정 작업에 기여하고 싶습니다
+          required: false
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: 📝 추가 정보
+      description: 다른 중요한 정보가 있다면 추가해주세요.
+      placeholder: |
+        - 다른 시스템에서의 유사한 사례
+        - 임시 해결책이나 우회 방법
+        - 관련 팀이나 담당자 정보
+        - 보안 검토 요청사항
