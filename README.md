@@ -45,21 +45,24 @@ shared-github-configs/
 │   ├── ISSUE_TEMPLATE/        # 이슈 템플릿
 │   ├── PULL_REQUEST_TEMPLATE/ # PR 템플릿
 │   └── CODEOWNERS            # 코드 소유자 설정
-├── vscode-templates/          # VSCode 관련 설정
-│   ├── settings.json         # 공통 설정
-│   ├── extensions.json       # 권장 확장 프로그램
-│   ├── tasks.json           # 빌드 및 실행 작업
-│   ├── launch.json          # 디버깅 설정
-│   └── snippets/            # 코드 스니펫
-├── instructions/             # 개발 가이드
-│   ├── taskmaster.instructions.md      # Taskmaster MCP 가이드
-│   ├── github-workflow.instructions.md # GitHub 워크플로우 가이드
+├── vscode-templates/          # VSCode 관련 설정 (표준화됨)
+│   ├── settings.json         # 핵심 설정만 포함 (25개 설정)
+│   ├── extensions.json       # 필수 확장 프로그램 (11개 선별)
+│   ├── tasks.json           # 기본 npm 스크립트 작업 (6개)
+│   ├── launch.json          # 단순화된 디버그 설정 (4개)
+│   └── snippets/            # 공통 코드 스니펫
+├── instructions/             # VSCode Copilot 및 개발 가이드
+│   ├── taskmaster.instructions.md      # Taskmaster MCP 통합 가이드
+│   ├── github-taskmaster.instructions.md # GitHub + Taskmaster 워크플로우
 │   ├── ntfy-notification.instructions.md # 알림 설정 가이드
-│   └── coding-style.instructions.md    # 코딩 스타일 가이드
-├── scripts/                 # 자동화 스크립트
-│   ├── setup-new-project.sh # 새 프로젝트 설정
+│   └── instruction-formatting.instructions.md # 문서화 규칙
+├── scripts/                 # 자동화 및 관리 스크립트
+│   ├── setup-new-project.sh # 새 프로젝트 자동 설정
 │   ├── sync-configs.sh      # 설정 동기화
-│   └── submodule-manager.sh # Git submodule 관리 도구
+│   ├── submodule-manager.sh # Git submodule 관리 도구
+│   ├── validate-structure.sh     # 전체 구조 검증
+│   ├── validate-github-templates.sh  # GitHub 템플릿 검증
+│   └── validate-vscode-templates.sh  # VSCode 템플릿 검증 (신규)
 ├── docs/                    # 상세 문서
 │   ├── git-submodule-guide.md   # Git Submodule 사용 가이드
 │   ├── installation.md      # 설치 가이드 (예정)
@@ -103,6 +106,32 @@ git push origin main
 ```
 
 ## 🛠️ 사용법
+
+### VSCode 설정 표준화
+이 저장소의 VSCode 설정은 실용적이고 단순한 개발 환경을 제공합니다:
+
+**표준화된 설정 (settings.json)**
+- 핵심 편집기 설정만 포함 (포맷팅, 탭 크기, 인코딩 등)
+- GitHub Copilot 통합 및 한국어 지원
+- Git 자동화 설정
+- 프로젝트 타입별 기본 파일 연결
+
+**선별된 확장 프로그램 (extensions.json)**
+- 언어 지원: JSON, YAML, TypeScript
+- 코드 품질: ESLint, Prettier
+- GitHub 통합: Copilot, GitLens
+- 필수 유틸리티: Markdown, 아이콘, 자동완성
+
+**단순화된 작업 (tasks.json)**
+- 의존성 설치, 빌드, 테스트, 린트, 개발 서버 실행
+- 모든 작업은 npm 스크립트 기반
+- 프로젝트 타입에 관계없이 일관된 인터페이스
+
+**기본 디버그 설정 (launch.json)**
+- Chrome 브라우저 디버깅
+- Node.js 애플리케이션 디버깅
+- Jest 테스트 디버깅
+- TypeScript 컴파일 후 디버깅
 
 ### 설정 수정
 1. `.shared-configs` 디렉토리에서 필요한 파일 수정

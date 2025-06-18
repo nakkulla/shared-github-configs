@@ -2,100 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "🔧 Taskmaster: Initialize Project",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "task-master-ai", "initialize"],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "new",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "📋 Taskmaster: Get Tasks",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "task-master-ai", "get-tasks"],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "🎯 Taskmaster: Next Task",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "task-master-ai", "next-task"],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "📊 Taskmaster: Complexity Analysis",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "task-master-ai", "analyze-complexity", "--research"],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "new",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "🔄 Sync Shared Configs",
-      "type": "shell",
-      "command": "${workspaceFolder}/scripts/sync-configs.sh",
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "📦 Install Dependencies",
       "type": "shell",
       "command": "npm",
@@ -105,9 +11,7 @@
         "echo": true,
         "reveal": "always",
         "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
+        "panel": "shared"
       },
       "options": {
         "cwd": "${workspaceFolder}"
@@ -115,7 +19,24 @@
       "problemMatcher": []
     },
     {
-      "label": "🧪 Run Tests",
+      "label": "🔍 Lint",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "lint"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$eslint-stylish"]
+    },
+    {
+      "label": "🧪 Test",
       "type": "shell",
       "command": "npm",
       "args": ["test"],
@@ -124,47 +45,7 @@
         "echo": true,
         "reveal": "always",
         "focus": false,
-        "panel": "dedicated",
-        "showReuseMessage": true,
-        "clear": true
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": "$tsc"
-    },
-    {
-      "label": "🔍 Lint Code",
-      "type": "shell",
-      "command": "npm",
-      "args": ["run", "lint"],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": ["$eslint-stylish"]
-    },
-    {
-      "label": "🎨 Format Code",
-      "type": "shell",
-      "command": "npm",
-      "args": ["run", "format"],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
+        "panel": "shared"
       },
       "options": {
         "cwd": "${workspaceFolder}"
@@ -172,93 +53,60 @@
       "problemMatcher": []
     },
     {
-      "label": "🚀 Start Development Server",
+      "label": "🚀 Build",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "🏃 Start",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "🔄 Dev",
       "type": "shell",
       "command": "npm",
       "args": ["run", "dev"],
       "group": "build",
-      "isBackground": true,
       "presentation": {
         "echo": true,
         "reveal": "always",
         "focus": false,
-        "panel": "dedicated",
-        "showReuseMessage": true,
-        "clear": true
+        "panel": "shared"
       },
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "problemMatcher": {
-        "owner": "webpack",
-        "pattern": {
-          "regexp": "ERROR in (.*?)\\((\\d+):(\\d+)\\)",
-          "file": 1,
-          "line": 2,
-          "column": 3
-        },
-        "background": {
-          "activeOnStart": true,
-          "beginsPattern": "webpack building",
-          "endsPattern": "webpack built|Failed to compile"
-        }
-      }
-    },
-    {
-      "label": "🏗️ Build Project",
-      "type": "shell",
-      "command": "npm",
-      "args": ["run", "build"],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "dedicated",
-        "showReuseMessage": true,
-        "clear": true
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": "$tsc"
-    },
-    {
-      "label": "📖 Generate Docs",
-      "type": "shell",
-      "command": "npm",
-      "args": ["run", "docs:generate"],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "🔧 Setup Git Hooks",
-      "type": "shell",
-      "command": "${workspaceFolder}/scripts/install-hooks.sh",
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
+      "problemMatcher": [],
+      "isBackground": true
     }
   ]
 }

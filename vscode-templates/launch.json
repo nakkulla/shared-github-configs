@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "🚀 Launch Chrome (localhost:3000)",
+      "name": "🚀 Launch Chrome",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:3000",
@@ -10,13 +10,6 @@
       "sourceMapPathOverrides": {
         "webpack:///./src/*": "${webRoot}/src/*"
       }
-    },
-    {
-      "name": "🔗 Attach to Chrome",
-      "type": "chrome",
-      "request": "attach",
-      "port": 9222,
-      "webRoot": "${workspaceFolder}"
     },
     {
       "name": "🐛 Debug Node.js",
@@ -29,136 +22,24 @@
       }
     },
     {
-      "name": "🔧 Debug Node.js with nodemon",
+      "name": "🧪 Debug Tests",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
-      "args": ["${workspaceFolder}/index.js"],
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": ["--runInBand"],
       "console": "integratedTerminal",
-      "restart": true,
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "📦 Debug TypeScript",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/dist/index.js",
+      "preLaunchTask": "🚀 Build",
+      "console": "integratedTerminal",
       "env": {
         "NODE_ENV": "development"
       }
-    },
-    {
-      "name": "🧪 Debug Jest Tests",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "args": ["--runInBand", "--detectOpenHandles"],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "env": {
-        "NODE_ENV": "test"
-      }
-    },
-    {
-      "name": "🧪 Debug Jest Test (Current File)",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "args": ["--runInBand", "${fileBasenameNoExtension}"],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "env": {
-        "NODE_ENV": "test"
-      }
-    },
-    {
-      "name": "🐍 Debug Python",
-      "type": "python",
-      "request": "launch",
-      "program": "${file}",
-      "console": "integratedTerminal",
-      "python": "${command:python.interpreterPath}"
-    },
-    {
-      "name": "🐍 Debug Python Module",
-      "type": "python",
-      "request": "launch",
-      "module": "main",
-      "console": "integratedTerminal",
-      "python": "${command:python.interpreterPath}",
-      "cwd": "${workspaceFolder}"
-    },
-    {
-      "name": "📱 Debug React Native (iOS)",
-      "type": "reactnative",
-      "request": "launch",
-      "platform": "ios",
-      "target": "simulator",
-      "sourceMaps": true,
-      "outDir": "${workspaceFolder}/.vscode"
-    },
-    {
-      "name": "📱 Debug React Native (Android)",
-      "type": "reactnative",
-      "request": "launch",
-      "platform": "android",
-      "target": "device",
-      "sourceMaps": true,
-      "outDir": "${workspaceFolder}/.vscode"
-    },
-    {
-      "name": "⚛️ Debug Next.js",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
-      "args": ["dev"],
-      "console": "integratedTerminal",
-      "env": {
-        "NODE_OPTIONS": "--inspect"
-      }
-    },
-    {
-      "name": "🔧 Debug TypeScript",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/ts-node/dist/bin.js",
-      "args": ["${file}"],
-      "console": "integratedTerminal",
-      "env": {
-        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json"
-      }
-    },
-    {
-      "name": "🐳 Debug Docker Container",
-      "type": "node",
-      "request": "attach",
-      "port": 9229,
-      "address": "localhost",
-      "localRoot": "${workspaceFolder}",
-      "remoteRoot": "/app",
-      "protocol": "inspector"
-    },
-    {
-      "name": "🔍 Debug Express Server",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/server.js",
-      "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "*"
-      },
-      "console": "integratedTerminal",
-      "restart": true,
-      "runtimeArgs": ["--inspect-brk"]
-    }
-  ],
-  "compounds": [
-    {
-      "name": "🌐 Debug Full Stack (Client + Server)",
-      "configurations": [
-        "🚀 Launch Chrome (localhost:3000)",
-        "🔍 Debug Express Server"
-      ]
-    },
-    {
-      "name": "🧪 Debug Tests + Server",
-      "configurations": [
-        "🧪 Debug Jest Tests",
-        "🔍 Debug Express Server"
-      ]
     }
   ]
 }
