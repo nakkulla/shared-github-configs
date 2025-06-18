@@ -23,7 +23,6 @@ git submodule add https://github.com/nakkulla/shared-github-configs.git .shared-
 # 심볼릭 링크 생성
 ln -s .shared-configs/github-templates .github
 ln -s .shared-configs/vscode-templates .vscode
-ln -s .shared-configs/instructions .github/instructions
 ```
 
 ### 2. 새 프로젝트 설정
